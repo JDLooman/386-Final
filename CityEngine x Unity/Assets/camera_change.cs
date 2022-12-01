@@ -6,6 +6,8 @@ public class camera_change : MonoBehaviour
 {
     public List<GameObject> cam;
 
+    public List<GameObject> text;
+
     private int curCam = 0;
 
     // Start is called before the first frame update
@@ -16,6 +18,12 @@ public class camera_change : MonoBehaviour
             camera.SetActive(false);
         }
         cam[0].SetActive(true);
+
+        foreach(GameObject textMes in text)
+        {
+            textMes.SetActive(false);
+        }
+        text[0].SetActive(true);
     }
 
     // Update is called once per frame
@@ -32,11 +40,15 @@ public class camera_change : MonoBehaviour
             curCam = 0;
             cam[curCam].SetActive(true);
             cam[cam.Count - 1].SetActive(false);
+            text[curCam].SetActive(true);
+            text[cam.Count - 1].SetActive(false);
         }
         else
         {
             cam[curCam].SetActive(true);    
             cam[curCam - 1].SetActive(false);
+            text[curCam].SetActive(true);    
+            text[curCam - 1].SetActive(false);
         }
     }
 
@@ -48,11 +60,15 @@ public class camera_change : MonoBehaviour
             curCam = cam.Count - 1;
             cam[curCam].SetActive(true);
             cam[0].SetActive(false);
+            text[curCam].SetActive(true);
+            text[0].SetActive(false);
         }
         else
         {
             cam[curCam].SetActive(true);    
             cam[curCam + 1].SetActive(false);
+            text[curCam].SetActive(true);    
+            text[curCam + 1].SetActive(false);
         }
     }
 }
