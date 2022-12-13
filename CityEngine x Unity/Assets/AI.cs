@@ -10,10 +10,14 @@ public class AI : MonoBehaviour
     NavMeshAgent agent;
 
     public int dest = 0;
+
+    private int rnd = 0;
     // Start is called before the first frame update
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        rnd = Random.Range(0, wayPoints.Count - 1);
+        dest = rnd;
     }
 
     // Update is called once per frame
@@ -22,12 +26,11 @@ public class AI : MonoBehaviour
         agent.destination = wayPoints[dest].transform.position;
         if(Vector3.Distance(agent.transform.position, wayPoints[dest].transform.position) < 10)
         {
-            Debug.Log("we are here");
-            dest++;
-            if(dest == wayPoints.Count)
+            while(rnd == dest)
             {
-                dest = 0;
+                rnd = Random.Range(0, wayPoints.Count - 1);
             }
+            dest = rnd;
         }
     }
 }
